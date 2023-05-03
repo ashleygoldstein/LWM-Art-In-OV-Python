@@ -1,0 +1,33 @@
+import omni.kit.commands
+import omni.kit.commands
+from pxr import Gf
+
+
+sphere_trans =Gf.Vec3f(0,0,0)
+sphere01_trans = sphere_trans + Gf .Vec3f(20,20,0)
+
+omni.kit.commands.execute('CreateMeshPrimWithDefaultXform',
+	prim_type='Sphere',
+	prim_path=None,
+	select_new_prim=True,
+	prepend_default_prim=True)
+
+
+omni.kit.commands.execute('ChangeProperty',
+	prop_path='/World/Sphere.xformOp:translate',
+	value=sphere_trans,
+	prev=None)
+
+omni.kit.commands.execute('CreateMeshPrimWithDefaultXform',
+	prim_type='Sphere',
+	prim_path=None,
+	select_new_prim=True,
+	prepend_default_prim=True)
+	
+	
+omni.kit.commands.execute('ChangeProperty',
+	prop_path='/World/Sphere_01.xformOp:translate',
+	value=sphere01_trans,
+	prev=None)
+	
+print(sphere01_trans)
