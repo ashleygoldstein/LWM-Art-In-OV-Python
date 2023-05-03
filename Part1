@@ -1,5 +1,4 @@
 import omni.kit.commands
-import omni.kit.commands
 from pxr import Gf
 
 
