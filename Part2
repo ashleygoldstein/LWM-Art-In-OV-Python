@@ -1,0 +1,35 @@
+mport omni.kit.commands
+from pxr import Gf
+import numpy
+import math
+
+#(x-h)2 + (y-k)2 = r2
+#hk are coordinates for the center of the circle . r = radius
+#h = (0,0,0)
+#k = (0,0,0)
+#x^2  + y^2 = r^2
+#for x in range(100)
+#r=10 = 100
+#100^2 +  y^2 = 10^2
+#y^2 = 100 -1000
+#y^2 = --900
+#y = 30
+#x2 + y2 = r2
+#y2 = r2 - x2
+# y = sqrt(r 2- x2) 
+
+for x in range(100):
+	if (math.pow(1000,2) - math.pow(x,2)) < 0:
+		continue
+		
+	y = math.sqrt(math.pow(1000,2) - math.pow(x,2))
+	sphere = Gf.Vec3f(x,y,0)
+	omni.kit.commands.execute('CreateMeshPrimWithDefaultXform',
+		prim_type='Sphere',
+		prim_path=None,
+		select_new_prim=True,
+		prepend_default_prim=True)
+	omni.kit.commands.execute('ChangeProperty',
+		prop_path='/World/Sphere.xformOp:translate',
+		value=sphere,
+		prev=None)
