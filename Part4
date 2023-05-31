@@ -1,0 +1,61 @@
+import omni.kit.commands
+from pxr import Gf
+import numpy
+import math
+
+
+ctx = omni.usd.get_context()
+stage = ctx.get_stage()
+path = omni.usd.get_stage_next_free_path(stage, '/World/Cube', False)
+
+
+cube_rot = [0,0,0]
+cube_01_rot = cube_rot + [10,10,10]
+
+omni.kit.commands.execute('CreateMeshPrimWithDefaultXform',
+	prim_type='Cube',
+	prim_path=path,
+	select_new_prim=True,
+	prepend_default_prim=True)
+omni.kit.commands.execute('ChangeProperty',
+	prop_path=path+'.xformOp:translate',
+	value=sphere,
+	prev=None)
+
+omni.kit.commands.execute('TransformMultiPrimsSRTCpp',
+	count=1,
+	paths=['/World/Cube'],
+	new_translations=[0.0, 0.0, 0.0],
+	new_rotation_eulers= cube_rot,
+	new_rotation_orders=[0, 1, 2],
+	new_scales=[3.1988777172248675, 0.2553451072575676, 1.0],
+	old_translations=[0.0, 0.0, 0.0],
+	old_rotation_eulers=[0.0, 0.0, 0.0],
+	old_rotation_orders=[0, 1, 2],
+	old_scales=[3.1988777172248666, 1.0, 1.0],
+	usd_context_name='',
+	time_code=0.0)
+	
+omni.kit.commands.execute('CreateMeshPrimWithDefaultXform',
+	prim_type='Cube',
+	prim_path=path,
+	select_new_prim=True,
+	prepend_default_prim=True)
+omni.kit.commands.execute('ChangeProperty',
+	prop_path=path+'.xformOp:translate',
+	value=sphere,
+	prev=None)
+
+omni.kit.commands.execute('TransformMultiPrimsSRTCpp',
+	count=1,
+	paths=['/World/Cube_01'],
+	new_translations=[0.0, 0.0, 0.0],
+	new_rotation_eulers= cube_01_rot,
+	new_rotation_orders=[0, 1, 2],
+	new_scales=[3.1988777172248675, 0.2553451072575676, 1.0],
+	old_translations=[0.0, 0.0, 0.0],
+	old_rotation_eulers=[0, 0, 0],
+	old_rotation_orders=[0, 1, 2],
+	old_scales=[3.1988777172248666, 1.0, 1.0],
+	usd_context_name='',
+	time_code=0.0)
